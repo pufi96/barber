@@ -334,6 +334,7 @@ $(document).ready(function () {
                     bookDate.nextElementSibling.innerHTML = "Booking in past isn't possible.";
                     bookDate.classList.add("borderRed");
                     bookDate.nextElementSibling.classList.add("textRed");
+                    validator++;
                 }
                 else {
                     bookDate.nextElementSibling.innerHTML = '';
@@ -365,7 +366,7 @@ $(document).ready(function () {
                     message.nextElementSibling.classList.remove("textRed");
                 }
                 console.log(validator);
-                if(!validator){
+                if(validator = 0){
                     window.alert("Expect mail from our customer service.");
                 }
         }
