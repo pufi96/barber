@@ -297,7 +297,7 @@ $(document).ready(function () {
         //name 
         if (!reNameSurname.test(name.value)) {
             name.innerHTML = "";
-            name.nextElementSibling.innerHTML = "First name must have first letters uppercase and minimum 3 letters in total.";
+            name.nextElementSibling.innerHTML = "First name must have first letter uppercase and minimum 3 letters in total.";
             name.classList.add("borderRed");
             name.nextElementSibling.classList.add("textRed");
             validator++;
@@ -310,7 +310,7 @@ $(document).ready(function () {
         //surname
         if (!reNameSurname.test(surname.value)) {
             surname.innerHTML = "";
-            surname.nextElementSibling.innerHTML = "Last name must have first letters uppercase and minimum 3 letters in total.";
+            surname.nextElementSibling.innerHTML = "Last name must have first letter uppercase and minimum 3 letters in total.";
             surname.classList.add("borderRed");
             surname.nextElementSibling.classList.add("textRed");
             validator++;
@@ -323,7 +323,7 @@ $(document).ready(function () {
         //email 
         if (!reEmail.test(email.value)) {
             email.innerHTML = "";
-            email.nextElementSibling.innerHTML = 'The email must have first letters uppercase and minimum 3 character before @.';
+            email.nextElementSibling.innerHTML = 'The email must have minimum 3 character before @.';
             email.classList.add("borderRed");
             email.nextElementSibling.classList.add("textRed");
             validator++;
@@ -351,7 +351,7 @@ $(document).ready(function () {
         }
         //subject
         if (!reLength.test(subject.value)) {
-            subject.nextElementSibling.innerHTML = 'Write subject, minimum 3 characters and start with letter.';
+            subject.nextElementSibling.innerHTML = 'Please write subject, minimum 3 characters and start with letter.';
             subject.classList.add("borderRed");
             subject.nextElementSibling.classList.add("textRed");
             validator++;
