@@ -1460,17 +1460,7 @@ a:focus {
     width: 225px !important;
     height: 225px !important;
 }
-.text-center{
-    height: 630px;
-    margin-bottom: 30px;
-}
-.toBottom{
-    position: absolute;
-    left: 50%;
-    bottom: -30px;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-}
+
 .btn-primary{
     background-color: #1d2434;
     color: #D5B981;
@@ -1489,4 +1479,7 @@ a:focus {
 }
 .borderRed{
     border: 1px solid #dc3545 !important;
+}
+.text-center{
+    margin-bottom: 40px;
 }
