@@ -278,7 +278,7 @@ $(document).ready(function () {
                 // dozvoljene vrednosti
                 var reNameSurname= /^([A-ZĐŽŠČĆ][a-zđžščć]{2,20})+$/ //at least 3 characters and first letter upper and max 20 characters with Serbian alphabet
                 var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/ 
-                var reLength = /^[A-z]*[\w]{4,}/
+                var reLength = /^[A-z][\w]{2,}/
                 var validator = 0;
                 console.log(date);
                 console.log(selectedDate);
@@ -342,7 +342,7 @@ $(document).ready(function () {
                 }
                 //subject
                 if(!reLength.test(subject.value)) { 	       
-                    subject.nextElementSibling.innerHTML = 'Write subject.';
+                    subject.nextElementSibling.innerHTML = 'Write subject, minimum 3 characters and start with letter.';
                     subject.classList.add("borderRed");
                     subject.nextElementSibling.classList.add("textRed");
                     validator++;
@@ -354,7 +354,7 @@ $(document).ready(function () {
                 }
                 //message length check
                 if(!reLength.test(message.value)) { 	       
-                    message.nextElementSibling.innerHTML = 'Please write question or some information about your booking.';
+                    message.nextElementSibling.innerHTML = 'Please write question or some information about your booking, minimum 3 characters and start with letter.';
                     message.classList.add("borderRed");
                     message.nextElementSibling.classList.add("textRed");
                     validator++;
@@ -366,7 +366,7 @@ $(document).ready(function () {
                 }
                 console.log(validator);
                 if(!validator){
-                    window.alert("Expect confirmation of your email from our customer service.");
+                    window.alert("Expect mail from our customer service.");
                 }
         }
 
