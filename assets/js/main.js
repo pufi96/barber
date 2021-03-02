@@ -164,7 +164,7 @@ $(document).ready(function () {
 
         document.getElementById('services').innerHTML = html;
         //when u click on book now scroll to contact form and select clicked option
-        $('#contactForm #select-service').html(data.map((s) => `<option value="${s.id}">${s.name} + " $" + ${s.price}</option>`).join(''));
+        $('#contactForm #select-service').html(data.map((s) => `<option value="${s.id}">${s.name}  $${s.price}</option>`).join(''));
         $('#services .book-it-click').on('click', function (e) {
             const clickedElementServiceId = $(e.target).attr('data-service-id');
             $('#contactForm #select-service').val(clickedElementServiceId);
