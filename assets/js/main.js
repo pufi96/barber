@@ -164,7 +164,7 @@ $(document).ready(function () {
 
         document.getElementById('services').innerHTML = html;
         //when u click on book now scroll to contact form and select clicked option
-        $('#contactForm #select-service').html(data.map((s) => `<option value="${s.id}">${s.name} ${s.price}</option>`).join(''));
+        $('#contactForm #select-service').html(data.map((s) => `<option value="${s.id}">${s.name} + " $" + ${s.price}</option>`).join(''));
         $('#services .book-it-click').on('click', function (e) {
             const clickedElementServiceId = $(e.target).attr('data-service-id');
             $('#contactForm #select-service').val(clickedElementServiceId);
@@ -190,7 +190,7 @@ $(document).ready(function () {
     getData('team', displayTeam);
 
     function displayFooter(data) {
-        $('#Footer,#authorFooter').html(data.map((footer) => `<div class="col-md-9">
+        $('#Footer').html(data.map((footer) => `<div class="col-md-9">
         <div class="footer-contact">
             <h2>Salon Address</h2>
             <p><i class="${footer.ourLocationIcon}"></i>${footer.ourLocation}</p>
@@ -377,13 +377,6 @@ $(document).ready(function () {
         }
     }
 
-
-
-
-
-
-
-
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
@@ -399,7 +392,6 @@ $(document).ready(function () {
         return false;
     });
 
-
     // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 0) {
@@ -408,7 +400,6 @@ $(document).ready(function () {
             $('.navbar').removeClass('nav-sticky');
         }
     });
-
 
     // Dropdown on mouse hover
     $(document).ready(function () {
