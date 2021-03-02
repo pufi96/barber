@@ -4,7 +4,7 @@
         "description": "Master Barber",
         "pic": {
             "alt": "Adam Phillips picture",
-            "src": "/assets/img/Adam-Phillips.jpg"
+            "src": "assets/img/Adam-Phillips.jpg"
         }
     },
     {
@@ -12,7 +12,7 @@
         "description": "Hair Expert",
         "pic": {
             "alt": "Dylan Adams picture",
-            "src": "/assets/img/Dylan-Adams.jpg"
+            "src": "assets/img/Dylan-Adams.jpg"
         }
     },
     {
@@ -20,7 +20,7 @@
         "description": "Beard Expert",
         "pic": {
             "alt": "Gloria Edwards picture",
-            "src": "/assets/img/Gloria-Edwards.jpg"
+            "src": "assets/img/Gloria-Edwards.jpg"
         }
     },
     {
@@ -28,7 +28,7 @@
         "description": "Hair Master",
         "pic": {
             "alt": "Josh Dunn picture",
-            "src": "/assets/img/Josh-Dunn.jpg"
+            "src": "assets/img/Josh-Dunn.jpg"
         }
     }
 ]
