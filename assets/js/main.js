@@ -4,11 +4,21 @@ $(document).ready(function () {
     let categoriesFilter = getLocalStorage("categoriesFilter", {
         c1: true
     });
-    
+
 
     //check if there is some value in local storage
     function getLocalStorage(key, defaultValue = null) {
-        return localStorage.getItem(key) === null ? defaultValue : JSON.parse(localStorage.getItem(key));
+        try {
+            return localStorage.getItem(key) === null ? defaultValue : JSON.parse(localStorage.getItem(key));
+        } catch (error) {
+            if(error instanceof SyntaxError){
+            console.log("Syntax error: " + error.message);  //error message
+            console.error(error.name);                      // error type
+            console.error(error.fileName);                  // file where is error
+            console.error(error.lineNumber);                // on what line is error
+            }     
+            return defaultValue;
+        }
     }
 
     //remeber selected category
@@ -31,9 +41,9 @@ $(document).ready(function () {
         });
     }
 
-     //show header
-     function displayHeader(data){
-        $('#header,#authonHeader').html(data.map((header)=> ` <div class="col-md-6">
+    //show header
+    function displayHeader(data) {
+        $('#header,#authonHeader').html(data.map((header) => ` <div class="col-md-6">
         <div class="top-bar-left">
             <div class="text">
                 <h2>${header.workTime}</h2>
@@ -53,13 +63,14 @@ $(document).ready(function () {
         </div>
     </div>`));
     }
-    getData('our-info',displayHeader);
+    getData('our-info', displayHeader);
 
 
     //display menu
     getData('menu', displayMenu);
-    function displayMenu(data){
-        $('#menu,#authorMenu').html(data.map((menu)=> `<a href="${menu.href}" class="nav-item nav-link">${menu.name}</a>`));
+
+    function displayMenu(data) {
+        $('#menu,#authorMenu').html(data.map((menu) => `<a href="${menu.href}" class="nav-item nav-link">${menu.name}</a>`));
     }
 
     //display category
@@ -160,11 +171,11 @@ $(document).ready(function () {
         });
     }
     getData('services', displayServices);
-    
-        //show our team
-    function displayTeam(data){
+
+    //show our team
+    function displayTeam(data) {
         //render HTML
-        $('#Team').html(data.map((team) =>  `<div class="col-lg-3 col-md-6">
+        $('#Team').html(data.map((team) => `<div class="col-lg-3 col-md-6">
                                                 <div class="team-item">
                                                     <div class="team-img">
                                                         <img src="${team.pic.src}" alt="${team.pic.alt}">
@@ -178,8 +189,8 @@ $(document).ready(function () {
     }
     getData('team', displayTeam);
 
-    function displayFooter(data){
-        $('#Footer,#authorFooter').html(data.map((footer)=> `<div class="col-md-9">
+    function displayFooter(data) {
+        $('#Footer,#authorFooter').html(data.map((footer) => `<div class="col-md-9">
         <div class="footer-contact">
             <h2>Salon Address</h2>
             <p><i class="${footer.ourLocationIcon}"></i>${footer.ourLocation}</p>
@@ -206,10 +217,10 @@ $(document).ready(function () {
     getData('our-info', displayFooter);
 
     getData('author', displayAuthor);
-    
+
     //author info
-    function displayAuthor(data){
-    $('#Author').html(data.map((author)=>   `<div class="modal-dialog modal-dialog-centered" role="document">
+    function displayAuthor(data) {
+        $('#Author').html(data.map((author) => `<div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">${author.title}</h5>                                                        
@@ -248,128 +259,123 @@ $(document).ready(function () {
     }
 
     //show quick links
-    function displayQuickLinks(data){
-        $('#quick').html(data.map((quick)=>`
+    function displayQuickLinks(data) {
+        $('#quick').html(data.map((quick) => `
                 <a href="${quick.href}">${quick.name}</a>
         `));
-        $('#quick').append(   `<button type="button" class="btn card-link blink" data-toggle="modal" data-target="#Author">Author</button>`);
+        $('#quick').append(`<button type="button" class="btn card-link blink" data-toggle="modal" data-target="#Author">Author</button>`);
     }
     getData('quickLink', displayQuickLinks);
 
     //show social network links
-    function displaySocial(data){
+    function displaySocial(data) {
         //render HTML
-        $('#Footer-social,#Social').html(data.map((social)=> ` <a href="${social.href}" target="_blank"><i class="${social.iconClass}"></i></a>`));
+        $('#Footer-social,#Social').html(data.map((social) => ` <a href="${social.href}" target="_blank"><i class="${social.iconClass}"></i></a>`));
     }
     getData('social', displaySocial);
 
     //form validate
     document.getElementById("btnCheck").addEventListener("click", forma);
-        function forma(){ 
-                var name = document.getElementById("fname");
-                var surname = document.getElementById("lname");
-                var email = document.getElementById("email"); 
-                var bookDate = document.getElementById("book-it");
-                var subject = document.getElementById("subject");
-                var message = document.getElementById("message");
-                var today = new Date();
-                var date = today.getFullYear()+ '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-'+('0' + today.getDate()).slice(-2);
-                var selectedDate = bookDate.value;
-                // dozvoljene vrednosti
-                var reNameSurname= /^([A-ZĐŽŠČĆ][a-zđžščć]{2,20})+$/ //at least 3 characters and first letter upper and max 20 characters with Serbian alphabet
-                var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/ 
-                var reLength = /^[A-z][\w]{2,}/
-                var validator = 0;
-                console.log(date);
-                console.log(selectedDate);
-                //name 
-                if(!reNameSurname.test(name.value)){ 	        
-                    name.innerHTML = "";
-                    name.nextElementSibling.innerHTML = "First name must have first letters uppercase and minimum 3 letters in total.";
-                    name.classList.add("borderRed");
-                    name.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else{
-                    name.innerHTML = "";
-                    name.nextElementSibling.innerHTML = "";
-                    name.classList.remove("borderRed");
-                    name.nextElementSibling.classList.remove("textRed");
-                }
-                //surname
-                if(!reNameSurname.test(surname.value)){  	        
-                    surname.innerHTML = "";
-                    surname.nextElementSibling.innerHTML = "Last name must have first letters uppercase and minimum 3 letters in total.";
-                    surname.classList.add("borderRed");
-                    surname.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else{
-                    surname.innerHTML = "";
-                    surname.nextElementSibling.innerHTML = "";
-                    surname.classList.remove("borderRed");
-                    surname.nextElementSibling.classList.remove("textRed");
-                }
-                //email 
-                if(!reEmail.test(email.value)){ 	       
-                    email.innerHTML = "";
-                    email.nextElementSibling.innerHTML = 'The email must have first letters uppercase and minimum 3 character before @.';
-                    email.classList.add("borderRed");
-                    email.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else{
-                    email.innerHTML = "";
-                    email.nextElementSibling.innerHTML = '';
-                    email.classList.remove("borderRed");
-                    email.nextElementSibling.classList.remove("textRed");
-                }
-                //bookDate
-                if(!bookDate.value) { 	       
-                    bookDate.nextElementSibling.innerHTML = 'Please book date.';
-                    bookDate.classList.add("borderRed");
-                    bookDate.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }else if(selectedDate<date){
-                    bookDate.nextElementSibling.innerHTML = "Booking in past isn't possible.";
-                    bookDate.classList.add("borderRed");
-                    bookDate.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else {
-                    bookDate.nextElementSibling.innerHTML = '';
-                    bookDate.classList.remove("borderRed");
-                    bookDate.nextElementSibling.classList.remove("textRed");
-                }
-                //subject
-                if(!reLength.test(subject.value)) { 	       
-                    subject.nextElementSibling.innerHTML = 'Write subject, minimum 3 characters and start with letter.';
-                    subject.classList.add("borderRed");
-                    subject.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else {
-                    subject.nextElementSibling.innerHTML = '';
-                    subject.classList.remove("borderRed");
-                    subject.nextElementSibling.classList.remove("textRed");
-                }
-                //message length check
-                if(!reLength.test(message.value)) { 	       
-                    message.nextElementSibling.innerHTML = 'Please write question or some information about your booking, minimum 3 characters and start with letter.';
-                    message.classList.add("borderRed");
-                    message.nextElementSibling.classList.add("textRed");
-                    validator++;
-                }
-                else {
-                    message.nextElementSibling.innerHTML = '';
-                    message.classList.remove("borderRed");
-                    message.nextElementSibling.classList.remove("textRed");
-                }
-                console.log(validator);
-                if(validator = 0){
-                    window.alert("Expect mail from our customer service.");
-                }
+
+    function forma() {
+        var name = document.getElementById("fname");
+        var surname = document.getElementById("lname");
+        var email = document.getElementById("email");
+        var bookDate = document.getElementById("book-it");
+        var subject = document.getElementById("subject");
+        var message = document.getElementById("message");
+        var today = new Date();
+        var date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        var selectedDate = bookDate.value;
+        // dozvoljene vrednosti
+        var reNameSurname = /^([A-ZĐŽŠČĆ][a-zđžščć]{2,20})+$/ //at least 3 characters and first letter upper and max 20 characters with Serbian alphabet
+        var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/
+        var reLength = /^[A-z][\w]{2,}/
+        var validator = 0;
+        console.log(date);
+        console.log(selectedDate);
+        //name 
+        if (!reNameSurname.test(name.value)) {
+            name.innerHTML = "";
+            name.nextElementSibling.innerHTML = "First name must have first letters uppercase and minimum 3 letters in total.";
+            name.classList.add("borderRed");
+            name.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            name.innerHTML = "";
+            name.nextElementSibling.innerHTML = "";
+            name.classList.remove("borderRed");
+            name.nextElementSibling.classList.remove("textRed");
         }
+        //surname
+        if (!reNameSurname.test(surname.value)) {
+            surname.innerHTML = "";
+            surname.nextElementSibling.innerHTML = "Last name must have first letters uppercase and minimum 3 letters in total.";
+            surname.classList.add("borderRed");
+            surname.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            surname.innerHTML = "";
+            surname.nextElementSibling.innerHTML = "";
+            surname.classList.remove("borderRed");
+            surname.nextElementSibling.classList.remove("textRed");
+        }
+        //email 
+        if (!reEmail.test(email.value)) {
+            email.innerHTML = "";
+            email.nextElementSibling.innerHTML = 'The email must have first letters uppercase and minimum 3 character before @.';
+            email.classList.add("borderRed");
+            email.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            email.innerHTML = "";
+            email.nextElementSibling.innerHTML = '';
+            email.classList.remove("borderRed");
+            email.nextElementSibling.classList.remove("textRed");
+        }
+        //bookDate
+        if (!bookDate.value) {
+            bookDate.nextElementSibling.innerHTML = 'Please book date.';
+            bookDate.classList.add("borderRed");
+            bookDate.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else if (selectedDate < date) {
+            bookDate.nextElementSibling.innerHTML = "Booking in past isn't possible.";
+            bookDate.classList.add("borderRed");
+            bookDate.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            bookDate.nextElementSibling.innerHTML = '';
+            bookDate.classList.remove("borderRed");
+            bookDate.nextElementSibling.classList.remove("textRed");
+        }
+        //subject
+        if (!reLength.test(subject.value)) {
+            subject.nextElementSibling.innerHTML = 'Write subject, minimum 3 characters and start with letter.';
+            subject.classList.add("borderRed");
+            subject.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            subject.nextElementSibling.innerHTML = '';
+            subject.classList.remove("borderRed");
+            subject.nextElementSibling.classList.remove("textRed");
+        }
+        //message length check
+        if (!reLength.test(message.value)) {
+            message.nextElementSibling.innerHTML = 'Please write question or some information about your booking, minimum 3 characters and start with letter.';
+            message.classList.add("borderRed");
+            message.nextElementSibling.classList.add("textRed");
+            validator++;
+        } else {
+            message.nextElementSibling.innerHTML = '';
+            message.classList.remove("borderRed");
+            message.nextElementSibling.classList.remove("textRed");
+        }
+        console.log(validator);
+        if (validator = 0) {
+            window.alert("Expect mail from our customer service.");
+        }
+    }
 
 
 
