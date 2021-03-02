@@ -1,0 +1,14 @@
+[
+    {
+        "title" : "About author",
+        "name" : "Bojan Stojkovic",
+        "index" : "29/19",
+        "description" : "I'm a current student at ICT College in Belgrade. I'm passionate about UI effects, animations and creating intuitive, dynamic user experiences.",
+        "infoDestination" : "You can see all my project here.",
+        "href" : "https://pufi96.github.io/portfolio/index.html",
+        "pic": {
+            "alt": "Author",
+            "src": "/assets/img/author.png"
+        } 
+    }
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "id" : "c1",
+        "name" : "All"
+    },
+    {
+        "id" : "c2",
+        "name" : "Haircut"
+    },
+    {
+        "id" : "c3",
+        "name" : "Beard Restyling"
+    },
+    {
+        "id" : "c4",
+        "name" :"Shave"
+    }
+]

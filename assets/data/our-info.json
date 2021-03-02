@@ -1,0 +1,13 @@
+[
+    {
+        "workTime" : "8:00 - 9:00",
+        "textTime" : "Opening Hour Mon - Fri",
+        "ourNumber" : "+123 456 7890",
+        "ourNumberIcon" : "fa fa-phone-alt",
+        "numberText" : "Call Us For Appointment",
+        "ourEmail" : "info&#64barber&#46com",
+        "ourEmailIcon" : "fa fa-envelope",
+        "ourLocation" : "123 Street, New York, USA",
+        "ourLocationIcon" : "fa fa-map-marker-alt"
+    }
+]

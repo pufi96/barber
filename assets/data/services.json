@@ -1,0 +1,132 @@
+[{
+        "id": 1,
+        "category": ["c2"],
+        "price": 39.99,
+        "name": "Haircut & Restyle",
+        "description": "This intricate service starts with a consultation, where you can discuss with our barber the new hairstyle you are looking for. This is followed by a haircut, blow dry and instructive styling with or without using hair products.",
+        "pic": {
+            "alt": "Haircut & Restyle",
+            "src": "/assets/img/Haircut-Restyle.jpg"
+        }
+    },
+    {
+        "id": 2,
+        "category": ["c2"],
+        "price": 34.99,
+        "name": "Clippers Only",
+        "description": "This service will give you a choice of a buzz cut (single grade all over) or a classic short back and sides. Our trained barbers will use professional quality clippers to achieve a buzz cut or just trim the back and sides. This will not include scissor work.",
+        "pic": {
+            "alt": "Clippers Only",
+            "src": "/assets/img/Clippers-Only.jpg"
+        }
+    },
+    {
+        "id": 3,
+        "category": ["c2"],
+        "price": 34.99,
+        "name": "Haircut",
+        "description": "This will include a quick trim to keep your hair neat & tidy. With this service the barber will keep the same style and just trim the lengths. You can choose between a classic club cut (scissor over comb) or combine scissors and clippers to achieve your preferred style.",
+        "pic": {
+            "alt": "Haircut",
+            "src": "/assets/img/Haircut.jpg"
+        }
+    },
+    {
+        "id": 4,
+        "category": ["c3"],
+        "price": 34.99,
+        "name": "Beard Restyling",
+        "description": "Give your beard the attention it requires. With beard restyling you can be sure that your illustrious beard & mustache will be trimmed, shaped and styled by our expert barbers with great precision. They will make sure that it suits your features and style perfectly.",
+        "pic": {
+            "alt": "Beard Restyling",
+            "src": "/assets/img/Beard-Restyling.jpg"
+        }
+    },
+    {
+        "id": 5,
+        "category": ["c2", "c3"],
+        "price": 49.99,
+        "name": "Haircut/ Clippers & Beard Restyle",
+        "description": "Combo offer: Haircut / Clippers & Beard Restyle.",
+        "pic": {
+            "alt": "Haircut/ Clippers & Beard Restyle",
+            "src": "/assets/img/Haircut-Clippers-Beard-Restyle.jpg"
+        }
+    },
+    {
+        "id": 6,
+        "category": ["c2", "c4"],
+        "price": 52.99,
+        "name": "Haircut/ Clippers & Classic Shave",
+        "description": "Combo offer: Haircut /Clippers & Classic Shave. ",
+        "pic": {
+            "alt": "Haircut/ Clippers & Classic Shave",
+            "src": "/assets/img/Haircut-Clippers-Classic-Shave.jpg"
+        }
+    },
+    {
+        "id": 7,
+        "category": ["c2", "c4"],
+        "price": 59.99,
+        "name": "Haircut/ Clippers & Luxury Shave",
+        "description": "Combo offer: Haircut / Clippers & Luxury Shave.",
+        "pic": {
+            "alt": "Haircut/ Clippers & Luxury Shave",
+            "src": "/assets/img/Haircut-Clippers-Luxury-Shave.jpg"
+        }
+    },
+    {
+        "id": 8,
+        "category": ["c2", "c3"],
+        "price": 49.99,
+        "name": "Haircut & Restyle & Beard Restyle",
+        "description": "Combo offer: Haircut & Restyle & Beard Restyle.",
+        "pic": {
+            "alt": "Haircut & Restyle & Beard Restyle",
+            "src": "/assets/img/Haircut-Restyle-Beard Restyle.jpg"
+        }
+    },
+    {
+        "id": 9,
+        "category": ["c2", "c4"],
+        "price": 54.99,
+        "name": "Haircut & Restyle & Classic Shave",
+        "description": "Combo offer: Haircut & Restyle & Classic Shave.",
+        "pic": {
+            "alt": "Haircut & Restyle & Classic Shave",
+            "src": "/assets/img/Haircut-Restyle-Classic-Shave.jpg"
+        }
+    },
+    {
+        "id": 10,
+        "category": ["c2", "c4"],
+        "price": 59.99,
+        "name": "Haircut & Restyle & Luxury Shave",
+        "description": "Combo offer: Haircut & Restyle & Luxury Shave.",
+        "pic": {
+            "alt": "Haircut & Restyle & Luxury Shave",
+            "src": "/assets/img/Haircut-Restyle-Luxury-Shave.jpg"
+        }
+    },
+    {
+        "id": 11,
+        "category": ["c4"],
+        "price": 36.99,
+        "name": "Classic Wet Shave",
+        "description": "A Hot towel wet shave which includes application of shave foam followed by a cut-throat shave. Soothed with after-shave balm in the end.",
+        "pic": {
+            "alt": "Classic Wet Shave",
+            "src": "/assets/img/Classic-Wet-Shave.jpg"
+        }
+    }, {
+        "id": 12,
+        "category": ["c4"],
+        "price": 41.99,
+        "name": "Luxury Wet Shave",
+        "description": "A classic wet shave which will be completed with luxury facial leaving your skin smooth & moisturized",
+        "pic": {
+            "alt": "Luxury Wet Shave",
+            "src": "/assets/img/Luxury-Wet-Shave.jpg"
+        }
+    }
+]
