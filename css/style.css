@@ -36,6 +36,7 @@ a:focus {
 .btn:focus,
 .form-control:focus {
     box-shadow: none;
+    color:#D5B981 !important;
 }
 
 .container-fluid {
