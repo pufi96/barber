@@ -11,12 +11,12 @@ $(document).ready(function () {
         try {
             return localStorage.getItem(key) === null ? defaultValue : JSON.parse(localStorage.getItem(key));
         } catch (error) {
-            if(error instanceof SyntaxError){
-            console.log("Syntax error: " + error.message);  //error message
-            console.error(error.name);                      // error type
-            console.error(error.fileName);                  // file where is error
-            console.error(error.lineNumber);                // on what line is error
-            }     
+            if (error instanceof SyntaxError) {
+                console.log("Syntax error: " + error.message); //error message
+                console.error(error.name); // error type
+                console.error(error.fileName); // file where is error
+                console.error(error.lineNumber); // on what line is error
+            }
             return defaultValue;
         }
     }
@@ -174,7 +174,6 @@ $(document).ready(function () {
 
     //show our team
     function displayTeam(data) {
-        //render HTML
         $('#Team').html(data.map((team) => `<div class="col-lg-3 col-md-6">
                                                 <div class="team-item">
                                                     <div class="team-img">
@@ -189,6 +188,7 @@ $(document).ready(function () {
     }
     getData('team', displayTeam);
 
+    //show footer with our info and quick links
     function displayFooter(data) {
         $('#Footer').html(data.map((footer) => `<div class="col-md-9">
         <div class="footer-contact">
@@ -218,7 +218,7 @@ $(document).ready(function () {
 
     getData('author', displayAuthor);
 
-    //author info
+    //author info > bootstraps modal
     function displayAuthor(data) {
         $('#Author').html(data.map((author) => `<div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
@@ -227,16 +227,16 @@ $(document).ready(function () {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="col s12 m6" id="pauthor">
+                                                            <div class="col-sm-12 col-md-6" id="pauthor">
                                                                 <img src="${author.pic.src}" alt="${author.pic.alt}">
                                                             </div>
-                                                            <div class="row col s12 m6" id="tauthor">
-                                                                <div class="col s12">
+                                                            <div class="row col-sm-12 col-md-6" id="tauthor">
+                                                                <div class="col-sm-12 text-center">
                                                                     <h2>
                                                                     ${author.name}
                                                                     </h2>
                                                                 </div>
-                                                                <div class="col s12">
+                                                                <div class="col-md-12 text-center">
                                                                     <p>
                                                                         My index number is ${author.index}
                                                                     </p>
@@ -263,6 +263,7 @@ $(document).ready(function () {
         $('#quick').html(data.map((quick) => `
                 <a href="${quick.href}">${quick.name}</a>
         `));
+        //adding bootstrap modal for author
         $('#quick').append(`<button type="button" class="btn card-link blink" data-toggle="modal" data-target="#Author">Author</button>`);
     }
     getData('quickLink', displayQuickLinks);
@@ -287,7 +288,7 @@ $(document).ready(function () {
         var today = new Date();
         var date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
         var selectedDate = bookDate.value;
-        // dozvoljene vrednosti
+        // allowable values 
         var reNameSurname = /^([A-ZĐŽŠČĆ][a-zđžščć]{2,20})+$/ //at least 3 characters and first letter upper and max 20 characters with Serbian alphabet
         var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/
         var reLength = /^[A-z][\w]{2,}/
@@ -384,8 +385,8 @@ $(document).ready(function () {
         }
     });
     $('.back-to-top').click(function () {
-        document.body.scrollTop = 0; 
-        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0; // safari
+        document.documentElement.scrollTop = 0; // mozilla abd chrome
     });
 
     // Sticky Navbar
