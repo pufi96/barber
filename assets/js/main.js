@@ -292,8 +292,6 @@ $(document).ready(function () {
         var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/
         var reLength = /^[A-z][\w]{2,}/
         var validator = 0;
-        console.log(date);
-        console.log(selectedDate);
         //name 
         if (!reNameSurname.test(name.value)) {
             name.innerHTML = "";
@@ -372,7 +370,7 @@ $(document).ready(function () {
             message.nextElementSibling.classList.remove("textRed");
         }
         console.log(validator);
-        if (validator = 0) {
+        if (validator == 0) {
             window.alert("Expect mail from our customer service.");
         }
     }
