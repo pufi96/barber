@@ -1411,13 +1411,17 @@ a:focus {
 .footer .copyright p a:hover {
     color: #D5B981;
 }
-
+@media (max-width: 850px){
+    .contact{
+        background-image:none !important;
+    }
+}
 @media (max-width: 767.98px) {
     .footer .copyright p,
     .footer .copyright .col-md-6:last-child p {
         margin: 5px 0;
         text-align: center;
-    }
+    } 
 }
 .red{
     font-size: 20px !important;
