@@ -227,7 +227,7 @@ $(document).ready(function () {
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="col-sm-12 col-md-6" id="pauthor">
+                                                            <div class="col-sm-12 col-md-6 text-center" id="pauthor">
                                                                 <img src="${author.pic.src}" alt="${author.pic.alt}">
                                                             </div>
                                                             <div class="row col-sm-12 col-md-6" id="tauthor">
