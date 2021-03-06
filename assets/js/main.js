@@ -76,7 +76,7 @@ $(document).ready(function () {
     //display category
     function displayCategories(data) {
         // render HTML
-        $('#category').html(data.map((category) => `<li data-category-id="${category.id}" class="${categoriesFilter[category.id] === true ? 'filter-active': ''}">${category.name}</li>`).join(""));
+        $('#category').html(data.map((category) => `<li data-category-id="${category.id}" class="${categoriesFilter[category.id] === true ? 'filter-active' : ''}">${category.name}</li>`).join(""));
 
         // Attach event listeners to filters
         $('#category li').on('click', function (e) {
@@ -116,13 +116,21 @@ $(document).ready(function () {
             getData('services', displayServices);
             setLocalStorage("categoriesFilter", categoriesFilter)
         });
+
+        $('.sort-form #sort-select, .sort-form input[type=radio]').on('change', function (e) {
+            getData('services', displayServices);
+        });
     }
     getData('category', displayCategories);
 
+
     //display services
     function displayServices(data) {
+        const sortField = $('.sort-form #sort-select').val();
+        const sortWay = $('.sort-form input[type=radio]:checked').val();
+
         //filter data of selected category
-        const filteredData = categoriesFilter.c1 === true ? data : data
+        let filteredData = categoriesFilter.c1 === true ? data : data
             .filter((service) => {
                 let atLeastOneCategory = false;
 
@@ -134,6 +142,30 @@ $(document).ready(function () {
 
                 return atLeastOneCategory;
             });
+
+        if (sortField && sortWay) {
+            filteredData = filteredData.sort((a, b) => {
+                if (sortWay == 'asc') {
+                    if (a[sortField] < b[sortField]) {
+                        return -1;
+                    }
+                    if (a[sortField] > b[sortField]) {
+                        return 1;
+                    }
+
+                    return 0;
+                } else {
+                    if (a[sortField] > b[sortField]) {
+                        return -1;
+                    }
+                    if (a[sortField] < b[sortField]) {
+                        return 1;
+                    }
+
+                    return 0;
+                }
+            });
+        }
         // render HTML
         let html = "";
         filteredData.forEach(service => {
@@ -204,12 +236,12 @@ $(document).ready(function () {
         <div class="footer-link">
             <h2>Quick Links</h2>
             <div id="quick">
-                
-            </div>   
-                     
+
+            </div>
+
         </div>
         <div class="modal fade" id="Author" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        
+
             </div>
     </div>
     `));
@@ -223,7 +255,7 @@ $(document).ready(function () {
         $('#Author').html(data.map((author) => `<div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLongTitle">${author.title}</h5>                                                        
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">${author.title}</h5>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -288,12 +320,12 @@ $(document).ready(function () {
         var today = new Date();
         var date = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
         var selectedDate = bookDate.value;
-        // allowable values 
+        // allowable values
         var reNameSurname = /^([A-ZĐŽŠČĆ][a-zđžščć]{2,20})+$/ //at least 3 characters and first letter upper and max 20 characters with Serbian alphabet
         var reEmail = /^[a-z][\w\.]*\@[a-z0-9]{3,20}(\.[a-z]{3,5})?\.[a-z]{2,3}$/
         var reLength = /^[A-z][\w]{2,}/
         var validator = 0;
-        //name 
+        //name
         if (!reNameSurname.test(name.value)) {
             name.innerHTML = "";
             name.nextElementSibling.innerHTML = "First name must have first letter uppercase and minimum 3 letters in total.";
@@ -319,7 +351,7 @@ $(document).ready(function () {
             surname.classList.remove("borderRed");
             surname.nextElementSibling.classList.remove("textRed");
         }
-        //email 
+        //email
         if (!reEmail.test(email.value)) {
             email.innerHTML = "";
             email.nextElementSibling.innerHTML = 'The email must have minimum 3 character before @.';
