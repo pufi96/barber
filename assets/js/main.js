@@ -91,6 +91,10 @@ $(document).ready(function () {
 
                 clickedElement.removeClass('filter-active');
                 delete categoriesFilter[clickedElementCategoryId];
+                if ($('#category-filter li.filter-active-category').length == 0) {
+                    $('#category-filter li[data-category-id=c1]').addClass('filter-active-category');
+                    categoriesFilter.c1 = true;
+                }
                 getData('services', displayServices);
                 setLocalStorage("categoriesFilter", categoriesFilter)
                 return;
