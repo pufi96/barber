@@ -89,8 +89,14 @@ $(document).ready(function () {
                     categoriesFilter.c1 = true;
                 }
 
-                clickedElement.removeClass('filter-active');
+                clickedElement.removeClass('filter-active-category');
                 delete categoriesFilter[clickedElementCategoryId];
+                //if all is only it can not be removed
+                if ($('#category-filter li.filter-active-category').length == 0) {
+                    $('#category-filter li[data-category-filter-id=c1]').addClass('filter-active-category');
+                    categoriesFilter.c1 = true;                   
+                    return;
+                }
                 getData('services', displayServices);
                 setLocalStorage("categoriesFilter", categoriesFilter)
                 return;
