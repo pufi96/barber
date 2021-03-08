@@ -87,6 +87,8 @@ $(document).ready(function () {
                 if ($('#category li.filter-active').length <= 1) {
                     $('#category li[data-category-id=c1]').addClass('filter-active');
                     categoriesFilter.c1 = true;
+                    clickedElement.removeClass('filter-active');
+                    delete categoriesFilter[clickedElementCategoryId];
                 }
 
                 clickedElement.removeClass('filter-active-category');
