@@ -1,13 +1,10 @@
 $(document).ready(function () {
 
-    //set default category filter on first load page
+    //set default category on first load page
     let categoriesFilter = getLocalStorage("categoriesFilter", {
         c1: true
     });
-    //set default category sort on first load page
-    let sortFilter = getLocalStorage("sortFilter", {
-        price: true
-    }); 
+
 
     //check if there is some value in local storage
     function getLocalStorage(key, defaultValue = null) {
@@ -77,17 +74,16 @@ $(document).ready(function () {
     }
 
     //display category
-    function displayCategoriesFilter(data) {
+    function displayCategories(data) {
         // render HTML
-        // category filter hmtl
-        $('#category-filter').html(data.map((category) => `<li data-category-filter-id="${category.id}" class="${categoriesFilter[category.id] === true ? 'filter-active-category' : ''}">${category.name}</li>`).join(""));
-        
-        // Attach event listeners to filters
-        $('#category-filter li').on('click', function (e) {
-            const clickedElement = $(e.target);
-            const clickedElementCategoryId = clickedElement.attr('data-category-filter-id');
+        $('#category').html(data.map((category) => `<li data-category-id="${category.id}" class="${categoriesFilter[category.id] === true ? 'filter-active' : ''}">${category.name}</li>`).join(""));
 
-            if (clickedElement.hasClass('filter-active')) {
+        // Attach event listeners to filters
+        $('#category li').on('click', function (e) {
+            const clickedElement = $(e.target);
+            const clickedElementCategoryId = clickedElement.attr('data-category-id');
+
+			if (clickedElement.hasClass('filter-active')) {
                 if ($('#category li.filter-active').length <= 1) {
                     $('#category li[data-category-id=c1]').addClass('filter-active');
                     categoriesFilter.c1 = true;                
@@ -105,64 +101,38 @@ $(document).ready(function () {
                 setLocalStorage("categoriesFilter", categoriesFilter)
                 return;
             }
-            if (clickedElement.hasClass('filter-active-category')) {
-                if ($('#category-filter li.filter-active-category').length <= 1 ) {     
-                    $('#category-filter li[data-category-filter-id=c1]').addClass('filter-active-category');
-                    categoriesFilter.c1 = true;                        
-                }
-
-                clickedElement.removeClass('filter-active-category');
-                delete categoriesFilter[clickedElementCategoryId];
-                //if all is only it can not be removed
-                if ($('#category-filter li.filter-active-category').length == 0) {
-                    $('#category-filter li[data-category-filter-id=c1]').addClass('filter-active-category');
-                    categoriesFilter.c1 = true;                   
-                    return;
-                }
-                getData('services', displayServices);
-                setLocalStorage("categoriesFilter", categoriesFilter);
-                return;
-            }
 
             if (clickedElementCategoryId == 'c1') {
-                $('#category-filter li').removeClass('filter-active-category');
+                $('#category li').removeClass('filter-active');
                 categoriesFilter = {
                     c1: true
                 };
             }
 
-            clickedElement.addClass('filter-active-category');
+            clickedElement.addClass('filter-active');
             categoriesFilter[clickedElementCategoryId] = true;
 
-            if ($('#category-filter li.filter-active-category').length > 1) {
-                $('#category-filter li[data-category-filter-id=c1]').removeClass('filter-active-category');
+            if ($('#category li.filter-active').length > 1) {
+                $('#category li[data-category-id=c1]').removeClass('filter-active');
                 if (categoriesFilter.c1) {
                     delete categoriesFilter.c1;
                 }
             }
-            
-            getData('services', displayServices);
-            setLocalStorage("categoriesFilter", categoriesFilter);
-                    });
 
-        $('.sort-form #category-sort, .sort-form input[type=radio]').on('change', function (e) {
+            getData('services', displayServices);
+            setLocalStorage("categoriesFilter", categoriesFilter)
+        });
+
+        $('.sort-form #sort-select, .sort-form input[type=radio]').on('change', function (e) {
             getData('services', displayServices);
         });
     }
-    getData('category-filter', displayCategoriesFilter);
+    getData('category', displayCategories);
 
-    //display Sort
-    function displayCategoriesSort(data){
-        //category sort html
-        $('#category-sort').html(data.map((sort) => `<option value="${sort.id}" class="${sortFilter[sort.id] === true ? 'sort-active-category' : ''}">${sort.name}</option>`).join(''));
-        setLocalStorage("sortFilter", sortFilter);
-        
-    }
-    getData('category-sort', displayCategoriesSort);
 
     //display services
     function displayServices(data) {
-        const sortField = $('.sort-form #category-sort').val();
+        const sortField = $('.sort-form #sort-select').val();
         const sortWay = $('.sort-form input[type=radio]:checked').val();
 
         //filter data of selected category
