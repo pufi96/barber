@@ -1117,8 +1117,8 @@ a:focus {
 
 .portfolio #portfolio-flters li:hover,
 .category-list-filters li:hover,
-.portfolio #portfolio-flters li.filter-active,
-.category-list-filters li.filter-active {
+.portfolio #portfolio-flters li.filter-active-category,
+.category-list-filters li.filter-active-category {
     background: #1d2434;
     color: #D5B981;
 }
