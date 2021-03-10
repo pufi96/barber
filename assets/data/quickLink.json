@@ -4,6 +4,10 @@
         "href" : "documentation.pdf" 
     },
     {
+        "name" : "SiteMap",
+        "href" : "sitemap.xml"
+    },
+    {
         "name" : "JavaScript",
         "href" : "assets/js/main.js" 
     }

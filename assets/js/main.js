@@ -1,11 +1,8 @@
 $(document).ready(function () {
-
     //set default category on first load page
     let categoriesFilter = getLocalStorage("categoriesFilter", {
         c1: true
     });
-
-
     //check if there is some value in local storage
     function getLocalStorage(key, defaultValue = null) {
         try {
@@ -20,12 +17,10 @@ $(document).ready(function () {
             return defaultValue;
         }
     }
-
     //remeber selected category
     function setLocalStorage(key, value) {
         return localStorage.setItem(key, JSON.stringify(value));
     }
-
     //ajax callback function
     function getData(file, callback) {
         $.ajax({
@@ -40,10 +35,9 @@ $(document).ready(function () {
             }
         });
     }
-
     //show header
     function displayHeader(data) {
-        $('#header,#authonHeader').html(data.map((header) => ` <div class="col-md-6">
+        $('#header,#authonHeader').html(data.map((header) => `<div class="col-md-6">
         <div class="top-bar-left">
             <div class="text">
                 <h2>${header.workTime}</h2>
@@ -64,89 +58,67 @@ $(document).ready(function () {
     </div>`));
     }
     getData('our-info', displayHeader);
-
-
     //display menu
     getData('menu', displayMenu);
-
     function displayMenu(data) {
         $('#menu,#authorMenu').html(data.map((menu) => `<a href="${menu.href}" class="nav-item nav-link">${menu.name}</a>`));
     }
-
     //display category
     function displayCategories(data) {
         // render HTML
         $('#category').html(data.map((category) => `<li data-category-id="${category.id}" class="${categoriesFilter[category.id] === true ? 'filter-active' : ''}">${category.name}</li>`).join(""));
-
         // Attach event listeners to filters
         $('#category li').on('click', function (e) {
             const clickedElement = $(e.target);
             const clickedElementCategoryId = clickedElement.attr('data-category-id');
-
             if (clickedElement.hasClass('filter-active')) {
                 if ($('#category li.filter-active').length <= 1) {
                     $('#category li[data-category-id=c1]').addClass('filter-active');
                     categoriesFilter.c1 = true;
                 }
-
                 clickedElement.removeClass('filter-active');
-                delete categoriesFilter[clickedElementCategoryId];
-                if ($('#category-filter li.filter-active-category').length == 0) {
-                    $('#category-filter li[data-category-id=c1]').addClass('filter-active-category');
-                    categoriesFilter.c1 = true;
-                }
+                delete categoriesFilter[clickedElementCategoryId];               
                 getData('services', displayServices);
                 setLocalStorage("categoriesFilter", categoriesFilter)
                 return;
             }
-
             if (clickedElementCategoryId == 'c1') {
                 $('#category li').removeClass('filter-active');
                 categoriesFilter = {
                     c1: true
                 };
             }
-
             clickedElement.addClass('filter-active');
             categoriesFilter[clickedElementCategoryId] = true;
-
             if ($('#category li.filter-active').length > 1) {
                 $('#category li[data-category-id=c1]').removeClass('filter-active');
                 if (categoriesFilter.c1) {
                     delete categoriesFilter.c1;
                 }
             }
-
             getData('services', displayServices);
             setLocalStorage("categoriesFilter", categoriesFilter)
         });
-
         $('.sort-form #sort-select, .sort-form input[type=radio]').on('change', function (e) {
             getData('services', displayServices);
         });
     }
     getData('category', displayCategories);
-
-
     //display services
     function displayServices(data) {
         const sortField = $('.sort-form #sort-select').val();
         const sortWay = $('.sort-form input[type=radio]:checked').val();
-
         //filter data of selected category
         let filteredData = categoriesFilter.c1 === true ? data : data
             .filter((service) => {
                 let atLeastOneCategory = false;
-
                 service.category.forEach(el => {
                     if (categoriesFilter[el] === true) {
                         atLeastOneCategory = true;
                     }
                 });
-
                 return atLeastOneCategory;
             });
-
         if (sortField && sortWay) {
             filteredData = filteredData.sort((a, b) => {
                 if (sortWay == 'asc') {
@@ -156,7 +128,6 @@ $(document).ready(function () {
                     if (a[sortField] > b[sortField]) {
                         return 1;
                     }
-
                     return 0;
                 } else {
                     if (a[sortField] > b[sortField]) {
@@ -165,7 +136,6 @@ $(document).ready(function () {
                     if (a[sortField] < b[sortField]) {
                         return 1;
                     }
-
                     return 0;
                 }
             });
@@ -197,7 +167,6 @@ $(document).ready(function () {
                         </div>
                     </div>`;
         });
-
         document.getElementById('services').innerHTML = html;
         //when u click on book now scroll to contact form and select clicked option
         $('#contactForm #select-service').html(data.map((s) => `<option value="${s.id}">${s.name}  $${s.price}</option>`).join(''));
@@ -207,7 +176,6 @@ $(document).ready(function () {
         });
     }
     getData('services', displayServices);
-
     //show our team
     function displayTeam(data) {
         $('#Team').html(data.map((team) => `<div class="col-lg-3 col-md-6">
@@ -223,7 +191,6 @@ $(document).ready(function () {
                                             </div>`));
     }
     getData('team', displayTeam);
-
     //show footer with our info and quick links
     function displayFooter(data) {
         $('#Footer').html(data.map((footer) => `<div class="col-md-9">
@@ -240,20 +207,15 @@ $(document).ready(function () {
         <div class="footer-link">
             <h2>Quick Links</h2>
             <div id="quick">
-
             </div>
-
         </div>
         <div class="modal fade" id="Author" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
             </div>
     </div>
     `));
     }
     getData('our-info', displayFooter);
-
     getData('author', displayAuthor);
-
     //author info > bootstraps modal
     function displayAuthor(data) {
         $('#Author').html(data.map((author) => `<div class="modal-dialog modal-dialog-centered" role="document">
@@ -293,7 +255,6 @@ $(document).ready(function () {
                                                 </div>
                                             </div>`));
     }
-
     //show quick links
     function displayQuickLinks(data) {
         $('#quick').html(data.map((quick) => `
@@ -303,17 +264,14 @@ $(document).ready(function () {
         $('#quick').append(`<button type="button" class="btn card-link blink" data-toggle="modal" data-target="#Author">Author</button>`);
     }
     getData('quickLink', displayQuickLinks);
-
     //show social network links
     function displaySocial(data) {
         //render HTML
         $('#Footer-social,#Social').html(data.map((social) => ` <a href="${social.href}" target="_blank"><i class="${social.iconClass}"></i></a>`));
     }
     getData('social', displaySocial);
-
     //form validate
     document.getElementById("btnCheck").addEventListener("click", forma);
-
     function forma() {
         var name = document.getElementById("fname");
         var surname = document.getElementById("lname");
@@ -411,7 +369,6 @@ $(document).ready(function () {
             window.alert("Expect mail from our customer service.");
         }
     }
-
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
@@ -424,7 +381,6 @@ $(document).ready(function () {
         document.body.scrollTop = 0; // safari
         document.documentElement.scrollTop = 0; // mozilla abd chrome
     });
-
     // Sticky Navbar
     $(window).scroll(function () {
         if ($(this).scrollTop() > 0) {
@@ -433,7 +389,6 @@ $(document).ready(function () {
             $('.navbar').removeClass('nav-sticky');
         }
     });
-
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
